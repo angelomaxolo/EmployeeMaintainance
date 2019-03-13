@@ -5,8 +5,8 @@ namespace EmployeeMaintainanceAPI.Core.Repositories
 {
     public interface IEmployeeRepository
     {
-        Person GetPersonWithOrWithoutEmployee(int personId, bool includeEmployeeInfo);
-        IEnumerable<Person> GetPersonsWithOrWithoutEmployee(bool includeEmployeeInfo);
+        Person GetPersonWithEmployeeInfo(int personId);
+        IEnumerable<Person> GetPersonsWithEmployeeInfo();
         void AddPersonWithEmployeeInfo(Person person);
         bool Save();
 

@@ -69,6 +69,15 @@ namespace EmployeeMaintainanceAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                //it allows the ability to force browser to only be accessed over https
+                //https strict transport security 
+                app.UseHsts();
+            }
+
+            //This handles bouncing http requests to the https endpoint
+            app.UseHttpsRedirection();
 
             employeeContext.EnsureSeedDataForContext();
             app.UseStatusCodePages();
@@ -80,6 +89,7 @@ namespace EmployeeMaintainanceAPI
                 cfg.CreateMap<Person, PersonDto>();
                 cfg.CreateMap<CreatePersonWithEmployeeInfoDto,Person>();
             });
+
             app.UseMvc();
         }
     }

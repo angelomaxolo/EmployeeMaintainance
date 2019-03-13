@@ -25,49 +25,38 @@ namespace EmployeeMaintainanceAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetPersonsWithOrWithoutEmployeeInfo(bool includeEmployeesInfo = true)
+        public IActionResult GetPersonsWithEmployeeInfo()
         {
-            var personsEntities = _employeeRepository.GetPersonsWithOrWithoutEmployee(includeEmployeesInfo);
+            var personsEntities = _employeeRepository.GetPersonsWithEmployeeInfo();
 
             if (personsEntities == null)
             {
                 return NotFound();
             }
 
-            if (includeEmployeesInfo)
-            {
-                var personsResult = Mapper.Map<IEnumerable<PersonDto>>(personsEntities);
+            var personsResult = Mapper.Map<IEnumerable<PersonDto>>(personsEntities);
 
-                return Ok(personsResult);
-            }
-
-            var personsWithOrWithoutEmployeeInfo = Mapper.Map<PersonWithoutEmployeeDto>(personsEntities);
-
-            return Ok(personsWithOrWithoutEmployeeInfo);
+            return Ok(personsResult);
+;
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetPersonWithOrWithoutEmployeeInfo(int id, bool includeEmployeeInfo = true)
+        [HttpGet("{id}", Name = "GetPersonWithEmployeeInfo")]
+        
+        public IActionResult GetPersonWithEmployeeInfo(int pId)
         {
+            
             //Get Person with or without Employee Details
 
-            var personEntities = _employeeRepository.GetPersonWithOrWithoutEmployee(id, includeEmployeeInfo);
+            var personEntities = _employeeRepository.GetPersonWithEmployeeInfo(pId);
 
             if (personEntities == null)
             {
                 return NotFound();
             }
 
-            if (includeEmployeeInfo)
-            {
-                var personResult = Mapper.Map<PersonDto>(personEntities);
+            var personResult = Mapper.Map<PersonDto>(personEntities);
 
-                return Ok(personResult);
-            }
-
-            var personWithoutEmployeeInfo = Mapper.Map<PersonWithoutEmployeeDto>(personEntities);
-
-            return Ok(personWithoutEmployeeInfo);
+            return Ok(personResult);
         }
 
         [HttpPost]
@@ -93,7 +82,9 @@ namespace EmployeeMaintainanceAPI.Controllers
             }
 
             var createdPersonToReturn = Mapper.Map<PersonDto>(person);
-            return CreatedAtRoute("GetPersonWithOrWithoutEmployeeInfo", new{personDto.Employee, id = person.PersonId}, createdPersonToReturn);
+
+            return CreatedAtRoute("GetPersonWithEmployeeInfo", new
+                {id = person.PersonId}, createdPersonToReturn);
 
         }
 

@@ -15,27 +15,16 @@ namespace EmployeeMaintainanceAPI.Persistance.Repositories
             _context = context;
         }
 
-        public Person GetPersonWithOrWithoutEmployee(int personId, bool includeEmployeeInfo)
+        public Person GetPersonWithEmployeeInfo(int personId)
         {
-            if (includeEmployeeInfo)
-            {
                 return _context.Persons
                     .Include(e => e.Employee).FirstOrDefault(p => p.PersonId == personId);
-            }
-
-            return _context.Persons.FirstOrDefault(p => p.PersonId == personId);
         }
 
-
-        public IEnumerable<Person> GetPersonsWithOrWithoutEmployee(bool includeEmployeeInfo)
+        public IEnumerable<Person> GetPersonsWithEmployeeInfo()
         {
-            if (includeEmployeeInfo)
-            {
                 return _context.Persons
                     .Include(e => e.Employee).ToList();
-            }
-
-            return _context.Persons.ToList();
         }
 
         public void AddPersonWithEmployeeInfo(Person person)

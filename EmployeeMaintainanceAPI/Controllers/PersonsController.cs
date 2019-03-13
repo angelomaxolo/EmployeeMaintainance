@@ -18,30 +18,5 @@ namespace EmployeeMaintainanceAPI.Controllers
         {
             _employeeRepository = employeeRepository;
         }
-
-        [HttpGet]
-        public IActionResult GetPersonsWithOrWithoutEmployeeInfo(bool includeEmployeesInfo)
-        {
-            var personsEntities = _employeeRepository.GetPersonsWithOrWithoutEmployee(includeEmployeesInfo);
-
-            if (personsEntities == null)
-            {
-                return NotFound();
-            }
-
-            if (includeEmployeesInfo)
-            {
-                var personsResult = Mapper.Map<IEnumerable<PersonDto>>(personsEntities);
-
-                Mapper.Map<IEnumerable<EmployeeDto>>(personsEntities);
-
-                return Ok(personsResult);
-            }
-
-            var personWithOutEmployeeInfo = Mapper.Map<IEnumerable<PersonWithoutEmployeeDto>>(personsEntities);
-
-            return Ok(personWithOutEmployeeInfo);
-
-        }
     }
 }
