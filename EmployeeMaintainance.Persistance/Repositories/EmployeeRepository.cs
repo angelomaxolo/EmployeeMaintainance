@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Employeemaintainance.Models.DTOs.Employee;
+﻿using Employeemaintainance.Models.DTOs.Employee;
 using Employeemaintainance.Models.Entities;
 using EmployeeMaintainance.Persistance.Persistance;
 using EmployeeMaintainance.Persistance.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EmployeeMaintainance.Persistance.Repositories
 {

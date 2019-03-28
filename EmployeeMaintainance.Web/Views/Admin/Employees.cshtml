@@ -8,13 +8,14 @@
 
 <h2>Employees</h2>
 <hr />
-
+<h4>Employee Numbers</h4>
 <ul class="employees">
+
     @foreach (var employee in Model)
     {
         <li>
             <div class="employeeNumber">
-                <a href="@Url.Action("Employee","Admin", new{id = employee.Id})">@employee.EmployeeNumber</a>
+                <a href="@Url.Action("Employee", "Admin", new {id = employee.Id})">@employee.EmployeeNumber</a>
             </div>
 
         </li>

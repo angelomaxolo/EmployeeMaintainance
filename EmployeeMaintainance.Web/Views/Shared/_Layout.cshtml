@@ -22,11 +22,12 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("EmployeeMaintenance", "", "", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("EmployeeMaintenance", "Employees", "Admin", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Add An Employee", "Create", "Admin")</li>
+                    <li>@Html.ActionLink("View All Employees", "Employees", "Admin")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @* Think of what you will put here that will be important *@
