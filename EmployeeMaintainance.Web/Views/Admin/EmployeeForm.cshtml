@@ -1,0 +1,45 @@
+﻿@model EmployeeMaintainance.Web.ViewModels.EmployeeFormViewModel
+@{
+    ViewBag.Title = "Create Employee";
+    Layout = "_Layout";
+}
+
+<h2>Create</h2>
+<hr/>
+
+@using (Html.BeginForm("Create", "Admin"))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.FirstName)
+        @Html.TextBoxFor(m => m.FirstName, new {@class = "form-control", autofocus = "autofocus", placeholder = "eg Angelo"})
+        @Html.ValidationMessageFor(m => m.FirstName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName, new {@class = "form-control", placeholder = "eg Maxolo"})
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.BirthDate)
+        @Html.TextBoxFor(m => m.BirthDate, new {@class = "form-control", placeholder = "eg yyyy/mm/dd" })
+        @Html.ValidationMessageFor(m => m.BirthDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.EmployeeNumber)
+        @Html.TextBoxFor(m => m.EmployeeNumber, new {@class = "form-control", placeholder = "eg 2147536954"})
+        @Html.ValidationMessageFor(m => m.EmployeeNumber)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.EmployedDate)
+        @Html.TextBoxFor(m => m.EmployedDate, new {@class = "form-control", placeholder = "eg yyyy/mm/dd" })
+        @Html.ValidationMessageFor(m => m.EmployedDate)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.TerminatedDate)
+        @Html.TextBoxFor(m => m.TerminatedDate, new {@class = "form-control", placeholder = "eg yyyy/mm/dd"})
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+}
+

@@ -1,0 +1,23 @@
+﻿@using Employeemaintainance.Models.DTOs.Employee
+@model IEnumerable<Employeemaintainance.Models.DTOs.Employee.CreateEmployeeDTO>
+
+@{
+    ViewBag.Title = "Employees";
+    Layout = "_Layout";
+}
+
+<h2>Employees</h2>
+<hr />
+
+<ul class="employees">
+    @foreach (var employee in Model)
+    {
+        <li>
+            <div class="employeeNumber">
+                <a href="@Url.Action("Employee","Admin", new{id = employee.Id})">@employee.EmployeeNumber</a>
+            </div>
+
+        </li>
+    }
+    <li></li>
+</ul>

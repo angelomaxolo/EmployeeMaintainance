@@ -1,0 +1,28 @@
+﻿@model Employeemaintainance.Models.DTOs.Employee.CreateEmployeeDTO
+
+@{
+    ViewBag.Title = "Employee Maintenance";
+    Layout = "_Layout";
+}
+
+<h2>Employee</h2>
+<hr/>
+
+<div class="employee">
+    <div>
+        <ul class="employeeInfo">
+            <li>@Model.EmployeeNumber</li>
+            <li>@Model.EmployedDate</li>
+            <li>@Model.TerminatedDate</li>
+        </ul>
+    </div>
+
+    <div class="actions">
+        <a href="@Url.Action("Edit", "Admin", new {id = Model.Id})">
+            Edit |
+        </a>
+        <a href="@Url.Action("Delete", "Admin", new {id = Model.Id})">
+            Delete
+        </a>
+    </div>
+</div>

@@ -4,8 +4,11 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>C:\Users\Angelo Maxolo\source\repos\EmployeeMaintainance\EmployeeMaintainanceAPI\EmployeeMaintainanceAPI.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
-    <Folder Include="Services\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -15,6 +18,13 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
     <PackageReference Include="NLog.Extensions.Logging" Version="1.4.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.0.0-rc2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\EmployeeMaintainance.Logic\EmployeeMaintainance.Logic.csproj" />
+    <ProjectReference Include="..\Employeemaintainance.Models\Employeemaintainance.Models.csproj" />
+    <ProjectReference Include="..\EmployeeMaintainance.Persistance\EmployeeMaintainance.Persistance.csproj" />
   </ItemGroup>
 
 </Project>

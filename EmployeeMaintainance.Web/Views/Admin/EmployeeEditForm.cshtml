@@ -1,0 +1,31 @@
+﻿@model EmployeeMaintainance.Web.ViewModels.EmployeeFormViewModel
+@{
+    ViewBag.Title = "Edit Employee details";
+    Layout = "_Layout";
+}
+
+<h2>Edit an Employee</h2>
+<hr />
+
+@using (Html.BeginForm("Update", "Admin", new {id = Model.Id}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EmployeeNumber)
+        @Html.TextBoxFor(m => m.EmployeeNumber, new { @class = "form-control", autofocus = "autofocus", placeholder = "eg 845667449" })
+        @Html.ValidationMessageFor(m => m.EmployeeNumber)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.EmployedDate)
+        @Html.TextBoxFor(m => m.EmployedDate, new { @class = "form-control", placeholder = "eg yyyy/mm/dd" })
+        @Html.ValidationMessageFor(m => m.EmployedDate)
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.TerminatedDate)
+        @Html.TextBoxFor(m => m.TerminatedDate, new { @class = "form-control", placeholder = "eg yyyy/mm/dd" })
+    </div>
+    <button type="submit" class="btn btn-primary btn-lg">Save</button>
+}

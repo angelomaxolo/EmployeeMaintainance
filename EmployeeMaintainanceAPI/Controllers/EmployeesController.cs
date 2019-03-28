@@ -1,95 +1,95 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
-using EmployeeMaintainanceAPI.Core.Dtos;
-using EmployeeMaintainanceAPI.Core.Models;
-using EmployeeMaintainanceAPI.Core.Repositories;
+﻿using System.Collections.Generic;
+using Employeemaintainance.Models.DTOs.Employee;
+using EmployeeMaintainance.Logic.Managers.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Razor.Language.CodeGeneration;
-using Microsoft.EntityFrameworkCore.Query.Internal;
-using Microsoft.EntityFrameworkCore.Update;
+using System.Threading.Tasks;
+using Employeemaintainance.Models.DTOs.Person;
 
 namespace EmployeeMaintainanceAPI.Controllers
 {
-    [Route("api/employees")]
     public class EmployeesController : Controller
     {
-        private readonly IEmployeeRepository _employeeRepository;
+        private IEmployeeManager _employeeManager;
 
 
-        public EmployeesController(IEmployeeRepository employeeRepository)
+        public EmployeesController(IEmployeeManager employeeManager)
         {
-            _employeeRepository = employeeRepository;
+            _employeeManager = employeeManager;
         }
 
-        [HttpGet]
-        public IActionResult GetPersonsWithEmployeeInfo()
+        /// <summary>
+        /// This will provide an employee based on the Id which is being passed
+        /// </summary>
+        /// <param name="id">Mandatory</param>
+        /// <returns></returns>
+        [HttpGet("api/employee/{id}")]
+        public async Task<IActionResult> GetEmployeeAsync(int id)
         {
-            var personsEntities = _employeeRepository.GetPersonsWithEmployeeInfo();
+            if (id <= 0)
+                return BadRequest();
 
-            if (personsEntities == null)
-            {
+            var employee = await _employeeManager.GetEmployeeByIdAsync(id);
+
+            if (employee == null)
                 return NotFound();
-            }
 
-            var personsResult = Mapper.Map<IEnumerable<PersonDto>>(personsEntities);
-
-            return Ok(personsResult);
-;
+            return Ok(employee);
         }
 
-        [HttpGet("{id}", Name = "GetPersonWithEmployeeInfo")]
-        
-        public IActionResult GetPersonWithEmployeeInfo(int pId)
+        [HttpGet("api/employee")]
+        public async Task<IActionResult> GetEmployeesAsync()
         {
-            
-            //Get Person with or without Employee Details
+            var employees = await _employeeManager.GetAllEmployeesAsync();
 
-            var personEntities = _employeeRepository.GetPersonWithEmployeeInfo(pId);
-
-            if (personEntities == null)
-            {
+            if (employees == null)
                 return NotFound();
-            }
 
-            var personResult = Mapper.Map<PersonDto>(personEntities);
 
-            return Ok(personResult);
+            return Ok(employees);
         }
 
-        [HttpPost]
-        public IActionResult CreatePersonWithEmployeeInfo([FromBody] CreatePersonWithEmployeeInfoDto personDto)
+        [HttpPut("api/employee/{id}")]
+        public async Task<IActionResult> UpdateEmployeeAsync(int id,[FromBody]UpdateEmployeeDTO employeeDto)
         {
-            if (personDto == null)
+            if (employeeDto == null)
             {
                 return BadRequest();
             }
 
-            if (!ModelState.IsValid)
+            var employee = await _employeeManager.UpdateEmployeeAsync(id,employeeDto);
+
+            return Ok(employee);
+            
+        }
+        
+        [HttpPost("api/employee")]
+        public async Task<IActionResult> CreateEmployeeAsync([FromBody] CreateEmployeeDTO employeeDto)
+        {
+            if (employeeDto == null)
             {
-                return BadRequest(ModelState);
+                return BadRequest();
             }
 
-            var person = Mapper.Map<Person>(personDto);
+            var employee = await _employeeManager.CreateEmployeeAsync(employeeDto);
 
-            _employeeRepository.AddPersonWithEmployeeInfo(person);
-
-            if (!_employeeRepository.Save())
-            {
-                return StatusCode(500, "A problem occured while handling your request");
-            }
-
-            var createdPersonToReturn = Mapper.Map<PersonDto>(person);
-
-            return CreatedAtRoute("GetPersonWithEmployeeInfo", new
-                {id = person.PersonId}, createdPersonToReturn);
-
+            return Ok(employee);
         }
 
+        [HttpDelete("api/employee/{id}")]
+        public async Task<IActionResult> DeleteEmployee(int id)
+        {
+            var employee =  await _employeeManager.GetEmployeeByIdAsync(id);
 
+            if (employee == null)
+            {
+                return NotFound();
+            }
 
+           await _employeeManager.DeleteEmployeeAsync(id);
+
+           return NoContent();
+
+        }
     }
 }
 
