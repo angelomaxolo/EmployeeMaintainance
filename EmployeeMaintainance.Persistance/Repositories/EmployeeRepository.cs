@@ -28,6 +28,7 @@ namespace EmployeeMaintainance.Persistance.Repositories
             {
                 EmployedDate = employeeDto.EmployedDate,
                 EmployeeNum = employeeDto.EmployeeNumber,
+                TerminatedDate = employeeDto.TerminatedDate,
                 PersonalDetails = new Person
                 {
                     PersonId = employeeDto.Person.Id,

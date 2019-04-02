@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Employeemaintainance.Models.DTOs.Person;
-using Employeemaintainance.Models.Entities;
+﻿using Employeemaintainance.Models.DTOs.Person;
 using EmployeeMaintainance.Logic.Managers.Interface;
 using EmployeeMaintainance.Persistance.Repositories.Interface;
+using System.Threading.Tasks;
 
 namespace EmployeeMaintainance.Logic.Managers
 {

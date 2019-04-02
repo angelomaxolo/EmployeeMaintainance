@@ -16,16 +16,11 @@ namespace EmployeeMaintainance.Web.ViewModels
     {
         public int Id { get; set; }
         [Required]
-        public string FirstName { get; set; }
-        [Required]
-        public string LastName { get; set; }
-        [Required]
-        public DateTime BirthDate { get; set; }
-        [Required]
         public string EmployeeNumber { get; set; }
         [Required]
         public DateTime EmployedDate { get; set; }
         public DateTime? TerminatedDate { get; set; }
+        public PersonFormViewModel PersonalDetails { get; set; }
 
     }
 }

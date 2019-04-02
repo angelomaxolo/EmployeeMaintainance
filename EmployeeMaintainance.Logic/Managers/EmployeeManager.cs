@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Employeemaintainance.Models.DTOs.Employee;
-using Employeemaintainance.Models.Entities;
+﻿using Employeemaintainance.Models.DTOs.Employee;
 using EmployeeMaintainance.Logic.Managers.Interface;
 using EmployeeMaintainance.Persistance.Repositories.Interface;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace EmployeeMaintainance.Logic.Managers
 {

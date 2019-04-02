@@ -79,15 +79,6 @@ namespace EmployeeMaintainanceAPI
             //This handles bouncing http requests to the https endpoint
             app.UseHttpsRedirection();
             app.UseStatusCodePages();
-            //AutoMapper.Mapper.Initialize(cfg =>
-            //{
-            //    cfg.CreateMap<Person, PersonWithoutEmployeeDto>();
-            //    cfg.CreateMap<Person, PersonWithEmployeeDto>();
-            //    cfg.CreateMap<Person, EmployeeDto>();
-            //    cfg.CreateMap<Person, PersonDto>();
-            //    cfg.CreateMap<CreatePersonWithEmployeeInfoDto, Person>();
-            //    cfg.CreateMap<UpdatePersonWithEmployeeInfoDto, Person>();
-            //});
 
             app.UseMvc();
             app.UseSwagger();

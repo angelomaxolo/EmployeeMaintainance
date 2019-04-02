@@ -22,13 +22,12 @@ namespace EmployeeMaintainance.Web.Controllers
 
         public async Task <IActionResult> Employee(int id)
         {
-            HttpResponseMessage response;
-            using (var httpClient = _httpClientFactory.CreateHttpClient())
-            {
+            var httpClient = _httpClientFactory.CreateHttpClient();
+            
                 var request = new  HttpRequestMessage(HttpMethod.Get, "api/employee/" + id);
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                response = await httpClient.SendAsync(request);
-            }
+                var response = await httpClient.SendAsync(request);
+            
 
             response.EnsureSuccessStatusCode();
 
@@ -41,13 +40,12 @@ namespace EmployeeMaintainance.Web.Controllers
         public async Task<IActionResult> Employees()
 
         {
-            HttpResponseMessage response;
-            using (var httpClient = _httpClientFactory.CreateHttpClient())
-            {
+            var httpClient = _httpClientFactory.CreateHttpClient();
+            
                 var request = new HttpRequestMessage(HttpMethod.Get, "api/employee");
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                response = await httpClient.SendAsync(request);
-            }
+                var response = await httpClient.SendAsync(request);
+            
 
             response.EnsureSuccessStatusCode();
 
@@ -57,11 +55,11 @@ namespace EmployeeMaintainance.Web.Controllers
             return View(employees);
         }
 
-        public async Task<IActionResult> Create(EmployeeFormViewModel viewModel)
+        public async Task<IActionResult> Create(EmployeeViewModel viewModel)
         {
-            HttpResponseMessage response;
-            using (var httpClient = _httpClientFactory.CreateHttpClient())
-            {
+
+            var httpClient = _httpClientFactory.CreateHttpClient();
+            
                 if (!ModelState.IsValid)
                 {
                     return View("EmployeeForm");
@@ -69,16 +67,17 @@ namespace EmployeeMaintainance.Web.Controllers
 
                 var employee = new CreateEmployeeDTO
                 {
-                    EmployeeNumber = viewModel.EmployeeNumber,
                     EmployedDate = viewModel.EmployedDate,
+                    EmployeeNumber = viewModel.EmployeeNumber,
                     TerminatedDate = viewModel.TerminatedDate,
                     Person = new PersonDTO
                     {
-                        LastName = viewModel.LastName,
-                        FirstName = viewModel.FirstName,
-                        DateOfBirth = viewModel.BirthDate
+                        Id = viewModel.PersonalDetails.Id,
+                        DateOfBirth = viewModel.PersonalDetails.BirthDate,
+                        LastName = viewModel.PersonalDetails.LastName,
+                        FirstName = viewModel.PersonalDetails.FirstName,
                     }
-                
+
                 };
 
                 var serializedEmployeeToCreate = JsonConvert.SerializeObject(employee);
@@ -89,10 +88,8 @@ namespace EmployeeMaintainance.Web.Controllers
                 request.Content = new StringContent(serializedEmployeeToCreate);
                 request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                response = await httpClient.SendAsync(request);
-            }
-
-            response.EnsureSuccessStatusCode();
+                var response = await httpClient.SendAsync(request);
+                response.EnsureSuccessStatusCode();
 
             //var content = await response.Content.ReadAsStringAsync();
             //var createdEmployee = JsonConvert.DeserializeObject<CreateEmployeeDTO>(content);
@@ -102,13 +99,13 @@ namespace EmployeeMaintainance.Web.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            HttpResponseMessage response;
-            using (var httpClient = _httpClientFactory.CreateHttpClient())
-            {
+
+            var httpClient = _httpClientFactory.CreateHttpClient();
+            
                 var request = new HttpRequestMessage(HttpMethod.Get, "api/employee/" + id);
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                response = await httpClient.SendAsync(request);
-            }
+                var response = await httpClient.SendAsync(request);
+            
 
             response.EnsureSuccessStatusCode();
 
@@ -134,9 +131,9 @@ namespace EmployeeMaintainance.Web.Controllers
 
         public async Task<IActionResult> Update(int id, EmployeeFormViewModel viewModel)
         {
-            HttpResponseMessage response;
-            using (var httpClient = _httpClientFactory.CreateHttpClient())
-            {
+
+            var httpClient = _httpClientFactory.CreateHttpClient();
+            
                 var employee = new UpdateEmployeeDTO
                 {
                     Id = viewModel.Id,
@@ -152,8 +149,8 @@ namespace EmployeeMaintainance.Web.Controllers
                 request.Content = new StringContent(serializedEmployeeToUpdate);
                 request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
 
-                response = await httpClient.SendAsync(request);
-            }
+                var response = await httpClient.SendAsync(request);
+            
 
             response.EnsureSuccessStatusCode();
 
@@ -165,14 +162,13 @@ namespace EmployeeMaintainance.Web.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            HttpResponseMessage response;
-            using (var httpClient = _httpClientFactory.CreateHttpClient())
-            {
+            var httpClient = _httpClientFactory.CreateHttpClient();
+            
                 var request = new HttpRequestMessage(HttpMethod.Delete, "api/employee/" + id);
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                response = await httpClient.SendAsync(request);
-            }
+                var response = await httpClient.SendAsync(request);
+            
 
             response.EnsureSuccessStatusCode();
 
