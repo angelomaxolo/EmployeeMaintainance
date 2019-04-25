@@ -76,15 +76,35 @@ namespace EmployeeMaintainance.Logic.Managers
         {
             var entities = await _employeeRepo.GetEmployeesAsync();
 
+            if (entities == null)
+            {
+                return null;
+            }
+
+            var results = entities.Select(entity => new CreateEmployeeDTO
+            {
+                Id = entity.EmployeeId, EmployeeNumber = entity.EmployeeNum, EmployedDate = entity.EmployedDate,
+                TerminatedDate = entity.TerminatedDate
+            }).ToList();
+
+            return new List<CreateEmployeeDTO>(results);
+        }
+
+        public async Task<List<CreateEmployeeDTO>> SearchEmployeeAsync(string term)
+        {
+            var entities = await _employeeRepo.SearchEmployeeAsync(term);
 
             if (entities == null)
             {
                 return null;
             }
 
-            var results = entities.Select(entity => new CreateEmployeeDTO {Id = entity.EmployeeId, EmployeeNumber = entity.EmployeeNum, EmployedDate = entity.EmployedDate, TerminatedDate = entity.TerminatedDate}).ToList();
+            var result = entities.Select(entity => new CreateEmployeeDTO
+            {
+               Id = entity.EmployeeId, EmployeeNumber = entity.EmployeeNum, EmployedDate = entity.EmployedDate, TerminatedDate = entity.TerminatedDate
+            }).ToList();
 
-            return new List<CreateEmployeeDTO>(results);
+            return new List<CreateEmployeeDTO>(result);
         }
     }
 }

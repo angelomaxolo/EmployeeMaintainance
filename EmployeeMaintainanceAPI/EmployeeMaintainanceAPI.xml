@@ -11,5 +11,40 @@
             <param name="id">Mandatory</param>
             <returns></returns>
         </member>
+        <member name="M:EmployeeMaintainanceAPI.Controllers.EmployeesController.GetEmployeesAsync">
+            <summary>
+            This will get all the employees on the database
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:EmployeeMaintainanceAPI.Controllers.EmployeesController.UpdateEmployeeAsync(System.Int32,Employeemaintainance.Models.DTOs.Employee.UpdateEmployeeDTO)">
+            <summary>
+            This will update an employee based on Id which is being passed
+            </summary>
+            <param name="id">Mandatory</param>
+            <param name="employeeDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EmployeeMaintainanceAPI.Controllers.EmployeesController.CreateEmployeeAsync(Employeemaintainance.Models.DTOs.Employee.CreateEmployeeDTO)">
+            <summary>
+            This will create a new employee entry
+            </summary>
+            <param name="employeeDto"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EmployeeMaintainanceAPI.Controllers.EmployeesController.DeleteEmployeeAsync(System.Int32)">
+            <summary>
+            This will delete an employee based on the Id being passed
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:EmployeeMaintainanceAPI.Controllers.EmployeesController.SearchEmployeeAsync(System.String)">
+            <summary>
+            This will search for an employee on the database based on the employee number passed
+            </summary>
+            <param name="term"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

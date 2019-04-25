@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Employeemaintainance.Models.DTOs.Person;
+﻿using Employeemaintainance.Models.DTOs.Person;
+using System;
 
 namespace Employeemaintainance.Models.DTOs.Employee
 {

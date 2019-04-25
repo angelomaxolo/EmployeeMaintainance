@@ -4,13 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - EmployeeMaintenance</title>
+
     <environment include="Development">
         <link href="~/node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
         <link href="~/node_modules/Content/Site.css" rel="stylesheet" />
+        <link href="~/node_modules/Jquery-ui/jquery-ui.css" rel="stylesheet" />
         <link href="~/node_modules/easy-autocomplete/dist/easy-autocomplete.css" rel="stylesheet" />
     </environment>
     <environment exclude="Development">
-
     </environment>
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css">
 </head>
@@ -27,8 +28,9 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Add An Employee", "Create", "Admin")</li>
-                    <li>@Html.ActionLink("View All Employees", "Employees", "Admin")</li>
+                    <li>@Html.ActionLink("Add Employee", "Create", "Admin")</li>
+                    <li>@Html.ActionLink("View Employees", "Employees", "Admin")</li>
+                    <li>@Html.ActionLink("Search Employees", "Search", "Admin")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @* Think of what you will put here that will be important *@
@@ -36,24 +38,28 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - EmployeeMaintenance</p>
-        </footer>
-    </div>
+<div class="container body-content">
+    @RenderBody()
+    <hr />
+    <footer>
+        <p>&copy; @DateTime.Now.Year - EmployeeMaintenance</p>
+    </footer>
+</div>
+
 <environment include="Development">
     @* This will render when the asp.net core environmental variable is set to Development  *@
     <script src="~/node_modules/jquery/dist/jquery.js"></script>
     <script src="~/node_modules/jquery-validation/dist/jquery.validate.js"></script>
     <script src="~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.js"></script>
+    <script src="~/node_modules/Jquery-ui/jquery-ui.js"></script>
+    <script src="~/node_modules/jquery/dist/jquery.js"></script>
     <script src="~/node_modules/easy-autocomplete/dist/jquery.easy-autocomplete.js"></script>
+    <script src="~/node_modules/Scripts/app.js"></script>
 </environment>
 
 <environment exclude="Development">
-
 </environment>
+
     @RenderSection("scripts", required: false)
 </body>
 </html>

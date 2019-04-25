@@ -36,6 +36,7 @@ namespace EmployeeMaintainanceAPI
             services.AddMvc()
                 .AddMvcOptions(o => o.OutputFormatters.Add(
                     new XmlDataContractSerializerOutputFormatter()));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Employee Maintenance API", Description = "Employee Maintenance Core API "});
@@ -54,8 +55,6 @@ namespace EmployeeMaintainanceAPI
                     .AddScoped<IEmployeeManager, EmployeeManager>();
 
         }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app,
                               IHostingEnvironment env,
                               ILoggerFactory loggerFactory)

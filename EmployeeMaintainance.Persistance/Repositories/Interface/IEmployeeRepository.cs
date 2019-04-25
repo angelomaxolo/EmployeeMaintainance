@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Employeemaintainance.Models.DTOs.Employee;
+﻿using Employeemaintainance.Models.DTOs.Employee;
 using Employeemaintainance.Models.Entities;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace EmployeeMaintainance.Persistance.Repositories.Interface
 {
@@ -14,5 +12,6 @@ namespace EmployeeMaintainance.Persistance.Repositories.Interface
         Task<int> DeleteEmployeeAsync(int employeeId);
         Task<Employee> GetEmployeeAsync(int employeeId);
         Task<IEnumerable<Employee>> GetEmployeesAsync();
+        Task<IEnumerable<Employee>> SearchEmployeeAsync(string term);
     }
 }

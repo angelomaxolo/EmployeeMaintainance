@@ -11,5 +11,7 @@ namespace EmployeeMaintainance.Logic.Managers.Interface
         Task<bool> DeleteEmployeeAsync(int employeeId);
         Task<CreateEmployeeDTO> GetEmployeeByIdAsync(int employeeId);
         Task<List<CreateEmployeeDTO>> GetAllEmployeesAsync();
+        Task<List<CreateEmployeeDTO>> SearchEmployeeAsync(string term);
+
     }
 }

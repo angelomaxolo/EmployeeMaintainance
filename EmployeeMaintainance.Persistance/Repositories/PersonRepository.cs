@@ -1,16 +1,15 @@
-﻿using Employeemaintainance.Models.DTOs.Employee;
+﻿using Employeemaintainance.Models.DTOs.Person;
 using Employeemaintainance.Models.Entities;
 using EmployeeMaintainance.Persistance.Persistance;
 using EmployeeMaintainance.Persistance.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
-using Employeemaintainance.Models.DTOs.Person;
 
 namespace EmployeeMaintainance.Persistance.Repositories
 {
     public class PersonRepository : IPersonRepository
     {
-        private EmployeeContext _context;
+        private readonly EmployeeContext _context;
 
         public PersonRepository(EmployeeContext context)
         {

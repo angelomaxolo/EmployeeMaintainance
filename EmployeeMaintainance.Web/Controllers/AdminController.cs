@@ -27,7 +27,6 @@ namespace EmployeeMaintainance.Web.Controllers
                 var request = new  HttpRequestMessage(HttpMethod.Get, "api/employee/" + id);
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 var response = await httpClient.SendAsync(request);
-            
 
             response.EnsureSuccessStatusCode();
 
@@ -45,7 +44,6 @@ namespace EmployeeMaintainance.Web.Controllers
                 var request = new HttpRequestMessage(HttpMethod.Get, "api/employee");
                 request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
                 var response = await httpClient.SendAsync(request);
-            
 
             response.EnsureSuccessStatusCode();
 
@@ -75,9 +73,8 @@ namespace EmployeeMaintainance.Web.Controllers
                         Id = viewModel.PersonalDetails.Id,
                         DateOfBirth = viewModel.PersonalDetails.BirthDate,
                         LastName = viewModel.PersonalDetails.LastName,
-                        FirstName = viewModel.PersonalDetails.FirstName,
+                        FirstName = viewModel.PersonalDetails.FirstName
                     }
-
                 };
 
                 var serializedEmployeeToCreate = JsonConvert.SerializeObject(employee);
@@ -176,5 +173,29 @@ namespace EmployeeMaintainance.Web.Controllers
 
             return RedirectToAction("Employees","Admin");
         }
+
+        public async Task<IActionResult> Search(SearchEmployeeViewModel viewModel)
+        {
+            
+            var httpClient = _httpClientFactory.CreateHttpClient();
+
+            if (viewModel.Term == null)
+            {
+                return View("Search");
+            }
+        
+            var request = new HttpRequestMessage(HttpMethod.Get, "api/employee/search/" + viewModel.Term);
+            request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            var response = await httpClient.SendAsync(request);
+
+
+            response.EnsureSuccessStatusCode();
+
+            var content = await response.Content.ReadAsStringAsync();
+            var employees = JsonConvert.DeserializeObject<IEnumerable<SearchEmployeeViewModel>>(content);
+
+            return View("SearchResults",employees);
+        }
+
     }
 }

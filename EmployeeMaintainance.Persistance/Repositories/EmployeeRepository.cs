@@ -4,6 +4,7 @@ using EmployeeMaintainance.Persistance.Persistance;
 using EmployeeMaintainance.Persistance.Repositories.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace EmployeeMaintainance.Persistance.Repositories
@@ -33,8 +34,8 @@ namespace EmployeeMaintainance.Persistance.Repositories
                 {
                     PersonId = employeeDto.Person.Id,
                     BirthDate = employeeDto.Person.DateOfBirth,
-                    FirstName = employeeDto.Person.FirstName,
-                    LastName = employeeDto.Person.FirstName
+                    LastName = employeeDto.Person.LastName,
+                    FirstName = employeeDto.Person.FirstName
                 }
             };
 
@@ -48,6 +49,7 @@ namespace EmployeeMaintainance.Persistance.Repositories
         /// <summary>
         /// Updates an existing <see cref="Employee"/> entry in the database.
         /// </summary>
+        /// <param name="id"></param>
         /// <param name="employeeDto"></param>
         /// <returns></returns>
         public async Task<Employee> UpdateEmployeeAsync(int id, UpdateEmployeeDTO employeeDto)
@@ -80,7 +82,6 @@ namespace EmployeeMaintainance.Persistance.Repositories
 
             return await _context.SaveChangesAsync();
         }
-
         /// <summary>
         /// Retrieves <see cref="Employee"/> from the database based on the specified id.
         /// </summary>
@@ -88,9 +89,18 @@ namespace EmployeeMaintainance.Persistance.Repositories
         /// <returns></returns>
         public async Task<Employee> GetEmployeeAsync(int employeeId) =>
            await _context.Employees.FirstOrDefaultAsync(employee => employee.EmployeeId == employeeId);
-
+        /// <summary>
+        /// Retrieves <see cref="Employee"/> from the database
+        /// </summary>
+        /// <returns></returns>
         public async Task<IEnumerable<Employee>> GetEmployeesAsync() =>
             await _context.Employees.ToListAsync();
-        
+        /// <summary>
+        /// Searches for an <see cref="Employee"/> via employee number
+        /// </summary>
+        /// <param name="term"></param>
+        /// <returns></returns>
+        public async Task<IEnumerable<Employee>> SearchEmployeeAsync(string term) =>
+           await _context.Employees.Where(e => e.EmployeeNum.Contains(term)).ToListAsync();
     }
 }

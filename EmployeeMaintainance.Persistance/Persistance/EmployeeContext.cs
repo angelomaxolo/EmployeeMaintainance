@@ -1,13 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using Employeemaintainance.Models.Entities;
+﻿using Employeemaintainance.Models.Entities;
 using EmployeeMaintainance.Persistance.Persistance.EntityConfigurations;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace EmployeeMaintainance.Persistance.Persistance
 {
@@ -32,10 +26,10 @@ namespace EmployeeMaintainance.Persistance.Persistance
             this.EnsureSeedDataForContext();
 
             //This will execute migrations only if there are migrations to be executed.
-            //if (Database.GetMigrations().Any())
-            //{
-            //    Database.Migrate();
-            //}
+            if (Database.GetMigrations().Any())
+            {
+                Database.Migrate();
+            }
         }
 
         public DbSet<Person> Persons { get; set; }

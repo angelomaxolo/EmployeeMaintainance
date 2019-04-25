@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Employeemaintainance.Models.DTOs.Employee;
-using Employeemaintainance.Models.DTOs.Person;
+﻿using Employeemaintainance.Models.DTOs.Person;
 using Employeemaintainance.Models.Entities;
+using System.Threading.Tasks;
 
 namespace EmployeeMaintainance.Persistance.Repositories.Interface
 {

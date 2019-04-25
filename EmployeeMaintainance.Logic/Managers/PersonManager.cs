@@ -8,7 +8,7 @@ namespace EmployeeMaintainance.Logic.Managers
     public class PersonManager : IPersonManager
 
     {
-        private IPersonRepository _personRepo;
+        private readonly IPersonRepository _personRepo;
 
         public PersonManager(IPersonRepository personRepo)
         {

@@ -1,0 +1,21 @@
+﻿
+@using EmployeeMaintainance.Web.ViewModels
+@model EmployeeMaintainance.Web.ViewModels.SearchEmployeeViewModel
+@{
+    ViewBag.Title = "Search For Employee";
+    Layout = "_Layout";
+}
+
+<h2>Search For Employee</h2>
+<hr />
+@using (Html.BeginForm("Search", "Admin"))
+{
+    <div class="form-group">
+        <div id="searchGigs" class="input-group">
+            @Html.TextBoxFor(m => m.Term, new { @class = "form-control", placeholder = "Search via Employee Number" })
+            <span class="input-group-addon">
+                <i class="glyphicon glyphicon-search"></i>
+            </span>
+        </div>
+    </div>
+}
